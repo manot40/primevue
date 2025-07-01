@@ -51,4 +51,19 @@ describe('ToggleButton', () => {
 
         expect(wrapper.find('.p-togglebutton-label').text()).toBe('I reject');
     });
+
+    it('should respect controlled modelValue state', async () => {
+        const INITIAL_STATE = true;
+        const CHANGED_STATE = false;
+
+        await wrapper.setProps({ modelValue: INITIAL_STATE });
+
+        await wrapper.vm.onChange({});
+        expect(wrapper.vm.active).toBe(INITIAL_STATE);
+
+        await wrapper.setProps({ modelValue: CHANGED_STATE });
+
+        await wrapper.vm.onChange({});
+        expect(wrapper.vm.active).toBe(CHANGED_STATE);
+    });
 });
